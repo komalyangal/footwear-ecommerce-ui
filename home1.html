@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <style>
+        /* Basic Styles */
+        
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        .cart {
+            display: flex;
+            justify-content: flex-end;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .cart-section {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            width: 300px;
+            display: none;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .cart-section h3 {
+            margin: 0;
+            text-align: center;
+        }
+        
+        .cart-item {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Cart Icon -->
+    <div class="cart" id="cart-icon">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span id="cart-count">0</span>
+        <!-- Cart Item Count -->
+    </div>
+
+    <!-- Cart Section -->
+    <div class="cart-section" id="cart-section">
+        <h3>Cart</h3>
+        <div id="cart-items"></div>
+    </div>
+
+    <!-- Products -->
+    <div id="products">
+        <button onclick="addToCart('Product 1')">Add Product 1</button>
+        <button onclick="addToCart('Product 2')">Add Product 2</button>
+        <button onclick="addToCart('Product 3')">Add Product 3</button>
+    </div>
+
+    <script>
+        // JavaScript Code to Handle Cart
+
+        // Variables
+        let cartItems = [];
+        const cartIcon = document.getElementById('cart-icon');
+        const cartSection = document.getElementById('cart-section');
+        const cartCount = document.getElementById('cart-count');
+        const cartItemsContainer = document.getElementById('cart-items');
+
+        // Toggle Cart Section
+        cartIcon.addEventListener('click', () => {
+            cartSection.style.display = cartSection.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Add Item to Cart
+        function addToCart(product) {
+            cartItems.push(product);
+            updateCart();
+        }
+
+        // Update Cart UI
+        function updateCart() {
+            cartCount.textContent = cartItems.length; // Update the cart count
+            cartItemsContainer.innerHTML = ''; // Clear the cart items
+            cartItems.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.classList.add('cart-item');
+                itemElement.textContent = item;
+                cartItemsContainer.appendChild(itemElement);
+            });
+        }
+    </script>
+
+</body>
+
+</html>
